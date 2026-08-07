@@ -16,7 +16,7 @@
 <ul>
 	<c:forEach items="${list}" var="dto" varStatus="varStatus">
 		<li>
-			<a href="${pageContext.request.contextPath}/todo/read?tid=${dto.tid}">${fn:length(list) - varStatus.index}.</a> 
+			<a href="${pageContext.request.contextPath}/todo/read?tid=${dto.tid}">${varStatus.index + 1}.</a> 
 				${dto.title} 
 				${dto.dueDate} 
 				${dto.finished}
