@@ -12,12 +12,9 @@ import lombok.Cleanup;
 
 public class TodoDAO {
 
-	public List<TodoVO> selectAll(String mid) throws Exception  {
+	public List<TodoVO> selectAll() throws Exception  {
 		@Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
-		@Cleanup PreparedStatement pstmt = conn.prepareStatement("select * from tbl_todo where mid = ?");
-		
-		pstmt.setString(1, mid);
-		
+		@Cleanup PreparedStatement pstmt = conn.prepareStatement("select * from tbl_todo") ;
 		@Cleanup ResultSet rs = pstmt.executeQuery();
 		List<TodoVO> list = new ArrayList<>();
 		
@@ -27,7 +24,6 @@ public class TodoDAO {
 					.title(rs.getString("title"))
 					.dueDate(rs.getDate("dueDate").toLocalDate())
 					.finished(rs.getBoolean("finished"))
-					.mid(rs.getString("mid"))
 					.build());
 		}
 		
@@ -52,10 +48,10 @@ public class TodoDAO {
 		return null;
 	}
 
-	public void deleteOne(String mid) throws Exception  {
+	public void deleteOne(long tid) throws Exception  {
 		@Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
 		@Cleanup PreparedStatement pstmt = conn.prepareStatement("delete from tbl_todo where tid=?") ;
-		pstmt.setString(1, mid);
+		pstmt.setLong(1, tid);
 		
 		pstmt.executeUpdate();
 	}
@@ -103,26 +99,26 @@ public class TodoDAO {
 //		@Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
 //		System.out.println("DB 연결 객체 얻기 되면 실제 DB에 연결됨 ");
 		
-//		TodoDAO todoDAO = new TodoDAO();
-//		List<TodoVO> list = todoDAO.selectAll(null);
-//		System.out.println(list);
-//
-//		System.out.println(todoDAO.selectOne(2));
-//		
-//		TodoVO todoVO = TodoVO.builder()
-//				.tid((long)2)
-//				.title("수정된 제목")
-//				.dueDate(LocalDate.now())
-//				.finished(false)
-//				.build();
-//		todoDAO.updateOne(todoVO);
-//		
-//		TodoVO todoVO2 = TodoVO.builder()
-//				.title("신규 제목")
-//				.dueDate(LocalDate.now())
-//				.finished(true)
-//				.build();
-//		todoDAO.insertOne(todoVO2);
+		TodoDAO todoDAO = new TodoDAO();
+		List<TodoVO> list = todoDAO.selectAll();
+		System.out.println(list);
+
+		System.out.println(todoDAO.selectOne(2));
+		
+		TodoVO todoVO = TodoVO.builder()
+				.tid((long)2)
+				.title("수정된 제목")
+				.dueDate(LocalDate.now())
+				.finished(false)
+				.build();
+		todoDAO.updateOne(todoVO);
+		
+		TodoVO todoVO2 = TodoVO.builder()
+				.title("신규 제목")
+				.dueDate(LocalDate.now())
+				.finished(true)
+				.build();
+		todoDAO.insertOne(todoVO2);
 		
 	}
 }
