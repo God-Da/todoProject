@@ -22,8 +22,8 @@ public enum TodoService {
 		System.out.println("DEBUG..." + todoDTO);
 	}
 	
-	public List<TodoDTO> getList() throws Exception {
-		List<TodoVO> list = todoDAO.selectAll();
+	public List<TodoDTO> getList(String mid) throws Exception {
+		List<TodoVO> list = todoDAO.selectAll(mid);
 		return list.stream().map(todoVO -> modelMapper.map(todoVO, TodoDTO.class)).toList();
 	}
 	
@@ -31,8 +31,8 @@ public enum TodoService {
 		return modelMapper.map(todoDAO.selectOne(tid), TodoDTO.class);
 	}
 
-	public void remove(long tid) throws Exception {
-		todoDAO.deleteOne(tid);
+	public void remove(String mid) throws Exception {
+		todoDAO.deleteOne(mid);
 	}
 
 	public void modify(TodoDTO todoDTO) throws Exception {
