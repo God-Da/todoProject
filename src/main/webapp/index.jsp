@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Hello World~~~</h1>
+<h1>Hello World~~~!</h1>
 <form action="/MyServlet2" method="post">
 	<input type="submit" value="전송">
 </form>
