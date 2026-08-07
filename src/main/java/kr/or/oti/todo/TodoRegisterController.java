@@ -32,22 +32,23 @@ public class TodoRegisterController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//할일 등록 한다
+		//세션에 저장해둔 memberDTO 객체를 가져온다
 		HttpSession session = request.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginInfo");
-
-		String id = memberDTO.getMid();
+		
+		String mid = memberDTO.getMid();
 		String title = request.getParameter("title");
 		String dueDate = request.getParameter("dueDate");
 		
 	
 		System.out.println("title = " + title);
 		System.out.println("dueDate = " + dueDate);
-		System.out.println();
-		
+
+		System.out.println("mid = " + mid);
 		TodoDTO todoDTO = TodoDTO.builder()
 				.title(title)
 				.dueDate(LocalDate.parse(dueDate))
-				.mid(id)
+				.mid(mid) //memberDTO에서 가져온 아이디 세팅 
 				.build();
 		
 		try {

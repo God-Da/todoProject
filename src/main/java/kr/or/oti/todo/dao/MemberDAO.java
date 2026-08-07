@@ -57,4 +57,13 @@ public class MemberDAO {
 		
 		return null;
 	}
+
+	public void deleteMember(String loginId) throws Exception{
+		String sql="DELETE FROM tbl_member WHERE mid=?";
+		@Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
+		@Cleanup PreparedStatement pstmt = conn.prepareStatement(sql) ;
+		pstmt.setString(1, loginId);
+		pstmt.executeUpdate();
+		
+	}
 }

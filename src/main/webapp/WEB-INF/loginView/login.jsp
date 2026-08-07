@@ -62,6 +62,21 @@
     .login-btn:hover {
         background-color: #0056b3;
     }
+    
+    .delete-btn {
+        width: 100%;
+        padding: 10px;
+        background-color: #9e9e9e;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .delete-btn:hover {
+        background-color: #333;
+    }
 </style>
 </head>
 <body>
@@ -90,12 +105,25 @@
 			<label for="auto">자동 로그인</label>
 			 
             <button type="submit" class="login-btn">로그인</button>
+            <button type="submit" class="delete-btn" formaction="${pageContext.request.contextPath}/deleteMember">회원탈퇴</button>            
         </form>
     </div>
 
     <script>
 	    const $loginId = $("#loginId");
 	    const $loginPw = $("#loginPw");
+	    
+	    $(document).ready(function() {
+	        const urlParams = new URLSearchParams(window.location.search);
+	        const result = urlParams.get('result');
+
+	        if (result === 'deleted') {
+	            alert("회원탈퇴가 완료되었습니다.");
+	        } else if (result === 'error') {
+	            alert("아이디 또는 비밀번호를 확인해주세요.");
+	        }
+	    });
+	    
 	    
 	    $(".login-btn").on("click", e => {
     		
@@ -120,6 +148,13 @@
             //$("#loginForm").submit();
     		
     	})
+    	
+    	//회원탈퇴
+    	$(".delete-btn").on("click", e => {
+        if (!confirm("정말 회원탈퇴 하시겠습니까?")) {
+            e.preventDefault();
+        }
+    });
     </script>
 
 </body>
