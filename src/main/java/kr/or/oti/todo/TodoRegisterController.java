@@ -37,13 +37,13 @@ public class TodoRegisterController extends HttpServlet {
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginInfo");
 		
 		String mid = memberDTO.getMid();
+		
+		
 		String title = request.getParameter("title");
 		String dueDate = request.getParameter("dueDate");
-		
-	
+
 		System.out.println("title = " + title);
 		System.out.println("dueDate = " + dueDate);
-
 		System.out.println("mid = " + mid);
 		TodoDTO todoDTO = TodoDTO.builder()
 				.title(title)

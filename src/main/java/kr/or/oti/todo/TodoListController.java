@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kr.or.oti.todo.dto.MemberDTO;
 import kr.or.oti.todo.dto.TodoDTO;
 import kr.or.oti.todo.service.TodoService;
 
@@ -29,9 +28,6 @@ public class TodoListController extends HttpServlet {
 		ServletContext application =  request.getServletContext();
 		HttpSession session = request.getSession();
 		
-		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
-		
-		String mid = loginInfo.getMid();
 		
 		application.setAttribute("count", "0");
 		session.setAttribute("count", 0);
@@ -41,7 +37,7 @@ public class TodoListController extends HttpServlet {
 		
 		List<TodoDTO> list;
 		try {
-			list = TodoService.INSTANCE.getList(mid);
+			list = TodoService.INSTANCE.getList();
 			request.setAttribute("list", list);
 		} catch (Exception e) {
 			e.printStackTrace();
