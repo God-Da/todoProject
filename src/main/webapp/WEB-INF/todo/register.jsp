@@ -10,7 +10,7 @@
 <form action="${pageContext.request.contextPath}/todo/register" method="post">
 	<input type="text" name="title" id="title" ><br/>
 	<input type="date" name="dueDate" id="dueDate"><br/>
-	<input type="submit" value="등록">
+	<input type="submit" value="등록"> 현재 로그인 유저: ${loginInfo.mid}
 </form>
 </body>
 </html>
