@@ -23,9 +23,9 @@ public class TodoRemoveController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//할일을 삭제한다
-		long tid = Long.parseLong(request.getParameter("tid"));
+		String mid = request.getParameter("loginId");
 		try {
-			TodoService.INSTANCE.remove(tid);
+			TodoService.INSTANCE.remove(mid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
