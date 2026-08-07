@@ -20,7 +20,7 @@ public class TodoRemoveController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 cnrk*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//할일을 삭제한다
 		String mid = request.getParameter("loginId");
