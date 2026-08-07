@@ -45,5 +45,9 @@ public enum MemberService {
 		}
 		return null;
 	}
+	
+	public void deleteMember(String loginId) throws Exception{
+		memberDAO.deleteMember(loginId);
+	}
 
 }
